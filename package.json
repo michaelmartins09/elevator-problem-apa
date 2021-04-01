@@ -1,0 +1,24 @@
+{
+	"name": "elevator-problem",
+	"version": "0.1.0",
+	"description": "A proposal of algorithm of smart elevators with dynamic programming.",
+	"main": "src/index.js",
+	"scripts": {
+		"start": "node .",
+		"debug": "node . debug"
+	},
+	"keywords": [
+		"node",
+		"inquirer"
+	],
+	"author": "Brandow and Judson and Matheus and Michael",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/michaelmartins09/elevator-problem-apa"
+	},
+	"devDependencies": {
+		"inquirer": "^8.0.0",
+		"inquirer-chalk-pipe": "^1.3.0"
+	}
+}
