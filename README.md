@@ -1,7 +1,8 @@
 <h1 align="center">
-Elevator Problem
+Elevator Problem - Disc. Análise e Projeto de Algorítmo
 </h1>
 
+<p align="center"> por, Brandow Buenos, Matheus Kildery, Judson Henrique e Michael Martins </p>
 
 <p align="center">
   <row>
