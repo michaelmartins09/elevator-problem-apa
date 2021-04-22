@@ -12,6 +12,7 @@ module.exports = {
 	'init': (data) => {
 		process.stdout.write('\u001b[2J\u001b[0;0H')
 		let result = {}
+		let index = 1
 		for (const problem of data) {
 			const startTime = now()
 
@@ -44,7 +45,8 @@ module.exports = {
 				time: (endTime-startTime).toFixed(2)
 			}
 
-			result[`charge${charge}`] = chargeProblem
+			result[`experimento${index}`] = chargeProblem
+			index++
 			// menu()
 		}
 
