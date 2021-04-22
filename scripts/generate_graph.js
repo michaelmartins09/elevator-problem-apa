@@ -9,7 +9,7 @@ const generateGraph = () => {
   const data = [
     {
       x: [charge10.time, charge20.time, charge30.time], 
-      y: [charge30.solutions, charge20.solutions, charge30.solutions],
+      y: [charge10.solutions, charge20.solutions, charge30.solutions],
       type: 'bar',
       name: 'Relação: Soluções x Tempo'
     },
