@@ -11,21 +11,16 @@ const Elevator = require('./class/elevator')
 module.exports = { 
 	'init': (data) => {
 		process.stdout.write('\u001b[2J\u001b[0;0H')
-
 		let result = {}
-
 		for (const problem of data) {
 			const startTime = now()
 
 			console.log('--------------------------------------------------------------')
-			console.log(chalkPipe('#FFD700.bold')('Problema do Elevador - Programação dinâmica'))
-			console.log(chalkPipe('white')('(Para sair pressione CTRL + C)'))
 			console.log('Carga de dados: ', problem)
 			console.log('--------------------------------------------------------------')
 
 			const { charge, stops, quantityStops } = problem
 
-			console.log()
 			console.log()
 			console.time('⌛️ Tempo de execução')
 			let elevator = new Elevator(charge, stops.split(','))
@@ -53,13 +48,8 @@ module.exports = {
 			// menu()
 		}
 
-		console.log()
 		console.log('--------------------------------------------------------------')
-		console.log()
-		console.log(                    "LAB - RESULT TEST")
-		console.log()
 		console.log(result)
-		console.log()
 		console.log('--------------------------------------------------------------')
 		return result
 	}
