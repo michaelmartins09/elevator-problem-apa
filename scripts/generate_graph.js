@@ -2,16 +2,23 @@ const plotLib = require('nodeplotlib')
 const { lab } = require("./execute_lab")
 
 const generateGraph = () => {
-  const { experimento1, experimento2, experimento3 } = lab
-
-  console.log(JSON.stringify(lab, null, 4))
+  const {
+    experimento1,
+    experimento2,
+  } = lab
 
   const data = [
     {
-      x: [experimento1.time, experimento2.time, experimento3.time], 
-      y: [experimento1.solutions, experimento2.solutions, experimento3.solutions],
-      type: 'bar',
-      name: 'Relação: Soluções x Tempo'
+      y: [experimento1.time, experimento2.time], 
+      x: [experimento1.charge, experimento2.charge],
+      type: 'line',
+      name: 'Relação: Tempo x Carga'
+    },
+    {
+      y: [experimento1.time, experimento2.time], 
+      x: [experimento1.charge, experimento2.charge],
+      type: 'line',
+      name: 'Relação: Tempo x Carga'
     },
   ];
   

@@ -42,7 +42,8 @@ module.exports = {
 
 			const chargeProblem = {
 				solutions: solutions.length,
-				time: (endTime-startTime).toFixed(2)
+				time: (endTime-startTime).toFixed(2),
+				charge
 			}
 
 			result[`experimento${index}`] = chargeProblem
