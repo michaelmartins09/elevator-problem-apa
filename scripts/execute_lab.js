@@ -44,4 +44,4 @@ function generateStops(size) {
     return arr.join(',')
 }
 
-module.exports = { "lab": init(elevatorAlg) }
+module.exports = { "lab": init(elevatorNormal) }
