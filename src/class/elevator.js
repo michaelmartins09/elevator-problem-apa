@@ -46,6 +46,34 @@ class Elevator {
 	}
 
 	/**
+	 * Percorre todas as combinações de tamanho n
+	 * em uma matriz de tamanho p
+	 *
+	 * @param  {number} qntStops Tamanho do conjunto de combinações
+	 * @param  {Array} solution Vetor das soluções encontradas
+	 * @param  {number} start [start = 0] Inicio do indice dos andares
+	 * @param  {number} index [index = 0] Indice atual do vetor de paradas
+	 * @param  {Array} stops [stops = Array] Vetor temporario de combinações
+	 */
+	 testBruteForce(qntStops, solution, start = 0, index = 0, stops = []) {
+		// A combinação atual está pronta para ser calculada
+		if (index == qntStops) {
+			return this.calculeFloor(qntStops, stops, solution)
+		}
+
+		// Substitui o indice por todos os elementos possíveis
+		for (let i = start; i <= this.floors.length; i++) {
+			// Esta condição garante que um elemento adicionado na lista de paradas
+			// irá realizar uma combinação única com o resto dos elemento
+			// e ainda irá realizar somente nas posições restantes
+			if (this.floors.length - i >= qntStops - index) {
+				stops[index] = this.floors[i]
+				this.testBruteForce(qntStops, solution, i + 1, index + 1, stops)
+			}
+		}
+	}
+
+	/**
 	 * Calcula quantas pessoas irão descer naquela combinação de andares
 	 *
 	 * @param {number} qntStops Tamanho do conjunto de combinações

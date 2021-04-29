@@ -2,24 +2,20 @@ const plotLib = require('nodeplotlib')
 const { lab } = require("./execute_lab")
 
 const generateGraph = () => {
-  const {
-    experimento1,
-    experimento2,
-    experimento3,
-  } = lab
+  const { bruteForce, progDynamic } = lab
 
   const data = [
     {
-      y: [experimento1.time, experimento2.time, experimento3.time], 
-      x: [experimento1.charge, experimento2.charge, experimento3.charge],
+      y: [bruteForce.experimento1.time, bruteForce.experimento2.time, bruteForce.experimento3.time], 
+      x: [bruteForce.experimento1.charge, bruteForce.experimento2.charge, bruteForce.experimento3.charge],
       type: 'line',
-      name: 'Relação: Tempo x Carga'
+      name: 'Alg Brute Force'
     },
     {
-      y: [experimento1.time, experimento2.time, experimento3.time], 
-      x: [experimento1.charge, experimento2.charge, experimento3.charge],
+      y: [progDynamic.experimento1.time, progDynamic.experimento2.time, progDynamic.experimento3.time], 
+      x: [progDynamic.experimento1.charge, progDynamic.experimento2.charge, progDynamic.experimento3.charge],
       type: 'line',
-      name: 'Relação: Tempo x Carga'
+      name: 'Alg Dynamic Programming'
     },
   ];
   
