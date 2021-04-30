@@ -15,54 +15,62 @@ Elevator Problem - Disc. Análise e Projeto de Algorítmo
 <br>
 
 
-## 🚀 Technology
+## 🚀 Tecnologia
 
-This project was development with:
+O projeto foi desenvolvido com as tecnologias abaixo:
 
-- [JavaScript](https://www.javascript.com/)
-- [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- [yarn](https://classic.yarnpkg.com/en/docs/install)
-
-
+- [JavaScript](https://www.javascript.com/) - Para codificação do nosso algorítmo
+- [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) - Para codificação do nosso algorítmo e gerencia de pacotes
+- [yarn](https://classic.yarnpkg.com/en/docs/install) - Como nossa gerência de pacote padrão
 
 
 
-## 💻 Project
-
-To elaborate this work, an algorithm capable of solving the elevator problem will be developed and implemented. 
-For this, a dynamic program  will be used as a project paradigm. For the purposes of experiments, 
-it will be possible to use dynamic arguments as data input for the operation of the solution or alternative alternative 
-to perform tests with standard data. With that it will be possible to analyze the functioning and performance of the algorithm 
-in relation to the solution of the problem. Finally, an analytical evaluation will be carried out that results in graphs of the results 
-obtained by this experiment, so that it is possible to draw up a comparison between the benefits of using dynamic programming for the program. 
-solving the problem and finally identifying the complexity of the algorithm. To implement the solution of our solution used, we will use the programming 
-language JavaScript. The choice of this language to solve the problem presented, the preference for the popularity of the language when it comes to dynamic 
-program implementations. In addition, the authors of this article are familiar with the chosen language.
 
 
-## 🤔 How to configure?
+## 💻 Projeto
 
+Para a elaboração deste trabalho, será desenvolvido e implementado um algoritmo capaz de solucionar o problema do elevador. Para isso, a programação dinâmica será utilizado como paradigma de projeto. Para fins de experimentos, será possível utilizar argumentos dinâmicos como entrada de dados para o funcionamento da solução ou alternativa alternativa para realizar testes com dados padrão. Com isso será possível analisar o funcionamento e desempenho do algoritmo em relação à solução do problema. Por fim, será realizada uma avaliação analítica que resulta em gráficos dos resultados obtidos por este experimento, de forma que seja possível fazer uma comparação entre os benefícios da utilização da programação dinâmica para o programa. resolver o problema e finalmente identificar a complexidade do algoritmo. Para implementar a solução de nossa solução utilizada, utilizaremos a linguagem de programação JavaScript. A escolha desta linguagem para resolver o problema apresentado, a preferência pela popularidade da linguagem quando se trata de implementações de programas dinâmicos. Além disso, os autores deste artigo estão familiarizados com a linguagem escolhida.
+
+
+## 🤔 Como configurar?
+
+ Realize o clone desse repositório com o GIT através do comando abaixo
  ```sh
- Clone the repository
- - $ git clone https://github.com/michaelmartins09/elevator-problem-apa.git
- - Go into the repository
- - $ cd elevator-problem-apa
- - Install dependencies
- - $ npm install OR yarn 
+ $ git clone https://github.com/michaelmartins09/elevator-problem-apa.git
+ ```
+ Após clonar o repositório, vá para dentro do projeto
+ ```sh
+ $ cd elevator-problem-apa
+ ```
+ E para que as dependências do projeto sejam carregadas, execute o comando abaixo através do NPM ou YARN
+ ```sh
+ $ yarn  // ou npm install
  ```
  
-## ▶️ How to run?
- ```sh
-  - Run the app 
-  - $ npm run start OR yarn start
-   ```
+## ▶️ Como executar?
+Para executar o projeto, esteja ciente de ter realizado a etapa de clone do projeto e instalação das dependências.
+
+- Use o comando abaixo para executar o algorítmo e fazer testes com entradas por argumentos
+```sh
+$ yarn start // ou npm run start
+```
+
+- Use o comando abaixo para executar experimentos no algorítmo com cargas pré-definidas
+```sh
+$ yarn lab // npm run lab
+```
+
+- Use o comando abaixo para executar mostrar gráficos gerados a partir de experimentos no algorítmo
+```sh
+$ yarn graph // npm run graph
+```
 
   
-## 🧪 How to run the app showing all combinations?
+## 🧪 Como ver todas combinações possíveis do algorítmo?
+Basta executar o comando abaixo.
  ```sh
-  - Run the debug
-  - $ npm run debug OR yarn debug
-   ```
+  - $ yarn debug // npm run debug
+  ```
 
 
 ## :memo: License
