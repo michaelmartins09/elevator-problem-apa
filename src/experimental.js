@@ -18,33 +18,33 @@ module.exports = {
 		if (testBruteForce) {
 			for (const problem of data) {
 			
-				console.log('--------------------------------------------------------------')
-				console.log('Carga de dados: ', problem)
-				console.log('--------------------------------------------------------------')
+				// console.log('--------------------------------------------------------------')
+				// console.log('Carga de dados: ', problem)
+				// console.log('--------------------------------------------------------------')
 				
 				const { charge, stops, quantityStops } = problem
 				
-				console.log()
+				//console.log()
 				const startTime = now()
-				console.time('⌛️ Tempo de execução')
+				//console.time('⌛️ Tempo de execução')
 				let elevator = new Elevator(charge, stops.split(','))
 				let solutions = []
 				for (let i = 1; i <= quantityStops; i++) {
 					eval(`elevator.testBruteForce(i, solutions)`)
 				}
 				const endTime = now()
-				console.timeEnd('⌛️ Tempo de execução')
+				//console.timeEnd('⌛️ Tempo de execução')
 	
 				solutions.sort((a, b) => b.cost - a.cost || a.floor.length - b.floor.length)
-				console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
+				//console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
 				debug(solutions)
-				console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
-				console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas para subir ou descer as escadas: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
-				console.log()
+				// console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
+				// console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas para subir ou descer as escadas: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
+				//console.log()
 	
 	
 				const chargeProblem = {
-					solutions: solutions.length,
+					//solutions: solutions.length,
 					time: (endTime-startTime).toFixed(2),
 					charge
 				}
@@ -57,33 +57,33 @@ module.exports = {
 		index = 1
 		for (const problem of data) {
 			
-			console.log('--------------------------------------------------------------')
-			console.log('Carga de dados: ', problem)
-			console.log('--------------------------------------------------------------')
+			// console.log('--------------------------------------------------------------')
+			// console.log('Carga de dados: ', problem)
+			// console.log('--------------------------------------------------------------')
 			
 			const { charge, stops, quantityStops } = problem
 			
-			console.log()
+			//console.log()
 			const startTime = now()
-			console.time('⌛️ Tempo de execução')
+			//console.time('⌛️ Tempo de execução')
 			let elevator = new Elevator(charge, stops.split(','))
 			let solutions = []
 			for (let i = 1; i <= quantityStops; i++) {
 				eval(`elevator.execute(i, solutions)`)
 			}
 			const endTime = now()
-			console.timeEnd('⌛️ Tempo de execução')
+			//console.timeEnd('⌛️ Tempo de execução')
 
 			solutions.sort((a, b) => b.cost - a.cost || a.floor.length - b.floor.length)
-			console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
+			//console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
 			debug(solutions)
-			console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
-			console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas para subir ou descer as escadas: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
-			console.log()
+			// console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
+			// console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas para subir ou descer as escadas: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
+			//console.log()
 
 
 			const chargeProblem = {
-				solutions: solutions.length,
+				//solutions: solutions.length,
 				time: (endTime-startTime).toFixed(2),
 				charge
 			}

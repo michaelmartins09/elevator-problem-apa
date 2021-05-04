@@ -1,21 +1,33 @@
 const { algorithm } = require("../src/experimental")
 
-const casesSize = 30
-const elevators = generateTestCases(casesSize)
+const testCasesSize = 8
+const peoplesSize = 6
+const testCaseList = generateTestCases(testCasesSize)
 
 function generateTestCases(caseSize = 1) {
-    let array = Array.from({length: caseSize}, (_, index) => 25 + index * 5)
-    console.log(array)
+    let array = Array.from({length: caseSize}, (_, index) => 2 + index * 5)
+    //console.log(array)
     let cases = []
     for (const value of array) {
         const caseTest = {
             charge: value,
-            stops: "1,2,5,7,9",
-            quantityStops: 3
+            stops: generateRandomStops(value), 
+            quantityStops: Math.floor(Math.random() * 10) + 1
         }
         cases.push(caseTest)
     }
     return cases
 }
 
-module.exports = { "lab": algorithm(elevators, true, casesSize) }
+function generateRandomStops(length) {
+    var result = [];
+    for ( var i = 0; i < peoplesSize; i++ ) {
+        const randomFloor = Math.floor(Math.random() * length) + 1;
+        result.push(randomFloor.toString())
+    }
+    return result.join(',');
+}
+
+module.exports = { "lab": algorithm(testCaseList, true, testCasesSize) }
+
+//console.log(testCaseList)
