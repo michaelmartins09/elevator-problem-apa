@@ -1,24 +1,36 @@
 const { algorithm } = require("../src/experimental")
 
+// Numero de entradas (execuções)
 const testCasesSize = 10
-const peoplesSize = 7
+// Numero de pessoas que querem subir no elevador
+const peoplesSize = 9
 const testCaseList = generateTestCases(testCasesSize)
 
+/**
+ * Função responsável por gerar cada caso de teste 
+ * de acordo com o tamanho de casos de teste informado 
+ * na variável testCasesSize
+ */
 function generateTestCases(caseSize = 1) {
-    let array = Array.from({length: caseSize}, (_, index) => Math.round(15 + index * 2))
+    let array = Array.from({length: caseSize}, (_, index) => Math.round(20 + index * 2))
 
     let cases = []
     for (const value of array) {
         const caseTest = {
-            charge: value,
+            lifts: value,
             stops: generateRandomStops(value), 
-            quantityStops: 5
+            quantityStops: 6
         }
         cases.push(caseTest)
     }
     return cases
-}//Carga de dados:  { charge: 30, stops: '12,9,15,12,15,6,14', quantityStops: 1 }
+}
 
+/**
+ * Função responsável por gerar as paradas de cada pessoa que
+ * deseja subir no elevador, as paradas são geradas de forma randômica
+ * de acordo com o número de pessoas e o número de andares.
+ */
 function generateRandomStops(length) {
     var result = [];
     for ( var i = 0; i < peoplesSize; i++ ) {
@@ -29,5 +41,3 @@ function generateRandomStops(length) {
 }
 
 module.exports = { "lab": algorithm(testCaseList, true, testCasesSize) }
-
-//console.log(testCaseList)

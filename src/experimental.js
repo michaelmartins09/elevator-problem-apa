@@ -21,35 +21,36 @@ module.exports = {
 			console.log('Carga de dados: ', problem)
 			console.log('--------------------------------------------------------------')
 			
-			const { charge, stops, quantityStops } = problem
+			const { lifts, stops, quantityStops } = problem
 			
 			console.log()
-			let elevator = new Elevator(charge, stops.split(','))
+			let elevator = new Elevator(lifts, stops.split(','))
 			let solutions = []
+
 			const startTime = performance.now()
 			for (let i = 1; i <= quantityStops; i++) {
 				elevator.execute(i, solutions)
 			}
+
 			const endTime = performance.now()
 			console.log("TIME: ", endTime - startTime)
 
 			solutions.sort((a, b) => b.cost - a.cost || a.floor.length - b.floor.length)
-			//console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
+			console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
 			debug(solutions)
-			// console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
-			// console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas para subir ou descer as escadas: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
+			console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
+			console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas para subir ou descer as escadas: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
 			console.log()
 
 
-			const chargeProblem = {
-				//solutions: solutions.length,
-				time: (endTime-startTime).toPrecision(5),
-				charge
+			const liftsProblem = {
+				solutions: solutions.length,
+				time: millisToMinutesAndSeconds((endTime-startTime).toPrecision(5)),
+				lifts
 			}
 
-			result[`experimento${index}`] = chargeProblem
+			result[`experimento${index}`] = liftsProblem
 			index++
-			// menu()
 		}
 		
 		index = 1
@@ -60,11 +61,10 @@ module.exports = {
 				console.log('Carga de dados: ', problem)
 				console.log('--------------------------------------------------------------')
 				
-				const { charge, stops, quantityStops } = problem
+				const { lifts, stops, quantityStops } = problem
 				
 				console.log()
-				//console.time('⌛️ Tempo de execução')
-				let elevator = new Elevator(charge, stops.split(','))
+				let elevator = new Elevator(lifts, stops.split(','))
 				let solutions = []
 				const startTime = performance.now()
 				for (let i = 1; i <= quantityStops; i++) {
@@ -74,22 +74,21 @@ module.exports = {
 				console.log("TIME: ", endTime - startTime)
 	
 				solutions.sort((a, b) => b.cost - a.cost || a.floor.length - b.floor.length)
-				//console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
+				console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
 				debug(solutions)
-				// console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
-				// console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas para subir ou descer as escadas: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
+				console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
+				console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas que não conseguirão entrar no elevador: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
 				console.log()
 	
 	
-				const chargeProblem = {
-					//solutions: solutions.length,
-					time: (endTime-startTime).toPrecision(4),
-					charge
+				const liftsProblem = {
+					solutions: solutions.length,
+					time: millisToMinutesAndSeconds((endTime-startTime).toPrecision(5)),
+					lifts
 				}
 	
-				resultBruteForce[`experimento${index}`] = chargeProblem
+				resultBruteForce[`experimento${index}`] = liftsProblem
 				index++
-				// menu()
 			}
 		}
 
@@ -112,4 +111,9 @@ const debug = (solutions) => {
 		console.log(solutions)
 		console.log()
 	}
+}
+
+function millisToMinutesAndSeconds(millis) {
+	var seconds = ((millis % 60000) / 1000).toPrecision(3);
+	return (seconds < 10 ? '0' : '') + seconds;
 }
