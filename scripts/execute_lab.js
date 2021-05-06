@@ -1,23 +1,23 @@
 const { algorithm } = require("../src/experimental")
 
-const testCasesSize = 8
-const peoplesSize = 6
+const testCasesSize = 10
+const peoplesSize = 7
 const testCaseList = generateTestCases(testCasesSize)
 
 function generateTestCases(caseSize = 1) {
-    let array = Array.from({length: caseSize}, (_, index) => 2 + index * 5)
-    //console.log(array)
+    let array = Array.from({length: caseSize}, (_, index) => Math.round(15 + index * 2))
+
     let cases = []
     for (const value of array) {
         const caseTest = {
             charge: value,
             stops: generateRandomStops(value), 
-            quantityStops: Math.floor(Math.random() * 10) + 1
+            quantityStops: 5
         }
         cases.push(caseTest)
     }
     return cases
-}
+}//Carga de dados:  { charge: 30, stops: '12,9,15,12,15,6,14', quantityStops: 1 }
 
 function generateRandomStops(length) {
     var result = [];
