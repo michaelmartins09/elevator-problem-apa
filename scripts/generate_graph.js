@@ -18,12 +18,12 @@ const generateGraph = () => {
   const data = [
     {
       y: Array.from({length: caseSize}, (_, index) => bruteForce[`experimento${index+1}`].time),
-      x: Array.from({length: caseSize}, (_, index) => bruteForce[`experimento${index+1}`].charge),
+      x: Array.from({length: caseSize}, (_, index) => bruteForce[`experimento${index+1}`].lifts),
       type: 'line', name: 'Brute Force'
     },
     {
       y: Array.from({length: caseSize}, (_, index) => progDynamic[`experimento${index+1}`].time),
-      x: Array.from({length: caseSize}, (_, index) => progDynamic[`experimento${index+1}`].charge),
+      x: Array.from({length: caseSize}, (_, index) => progDynamic[`experimento${index+1}`].lifts),
       type: 'line', name: 'Dynamic Programming'
     },
   ];

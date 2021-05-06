@@ -27,22 +27,29 @@ class Elevator {
 	 * @param  {number} index [index = 0] Indice atual do vetor de paradas
 	 * @param  {Array} stops [stops = Array] Vetor temporario de combinações
 	 */
-	execute(qntStops, solution, start = 0, index = 0, stops = []) {
-		// A combinação atual está pronta para ser calculada
-		if (index == qntStops) {
-			return this.calculeFloor(qntStops, stops, solution)
+	execute(qntStops, solution, start = 0, index = 0, stops = [], computed = []) {
+
+		// Solution pode vir com valores
+		if (!computed.includes(solution)){
+			if (index == qntStops) {
+				return this.calculeFloor(qntStops, stops, solution)
+			}
+	
+			// Substitui o indice por todos os elementos possíveis
+			for (let i = start; i <= this.floors.length; i++) {
+				// Esta condição garante que um elemento adicionado na lista de paradas
+				// irá realizar uma combinação única com o resto dos elemento
+				// e ainda irá realizar somente nas posições restantes
+				stops[index] = this.floors[i]
+				if (this.floors.length - i >= qntStops - index && stops[index].qntPessoas != 0) {
+					this.execute(qntStops, solution, i + 1, index + 1, stops, computed)
+				}
+			}
+		} else {
+			this.execute(qntStops, solution, i + 1, index + 1, stops, computed)
 		}
 
-		// Substitui o indice por todos os elementos possíveis
-		for (let i = start; i <= this.floors.length; i++) {
-			// Esta condição garante que um elemento adicionado na lista de paradas
-			// irá realizar uma combinação única com o resto dos elemento
-			// e ainda irá realizar somente nas posições restantes
-			stops[index] = this.floors[i]
-			if (this.floors.length - i >= qntStops - index && stops[index].qntPessoas != 0) {
-				this.execute(qntStops, solution, i + 1, index + 1, stops)
-			}
-		}
+		// A combinação atual está pronta para ser calculada
 	}
 
 	/**
@@ -55,10 +62,10 @@ class Elevator {
 	 * @param  {number} index [index = 0] Indice atual do vetor de paradas
 	 * @param  {Array} stops [stops = Array] Vetor temporario de combinações
 	 */
-	 testBruteForce(qntStops, solution, start = 0, index = 0, stops = []) {
+	 bruteForce(qntStops, solution, start = 0, index = 0, stops = []) {
 		// A combinação atual está pronta para ser calculada
 		if (index == qntStops) {
-			return this.calculeFloor(qntStops, stops, solution)
+			return this.calculeFloor(qntStops, stops, solution, true)
 		}
 
 		// Substitui o indice por todos os elementos possíveis
@@ -68,7 +75,7 @@ class Elevator {
 			// e ainda irá realizar somente nas posições restantes
 			if (this.floors.length - i >= qntStops - index) {
 				stops[index] = this.floors[i]
-				this.testBruteForce(qntStops, solution, i + 1, index + 1, stops)
+				this.bruteForce(qntStops, solution, i + 1, index + 1, stops)
 			}
 		}
 	}
@@ -81,15 +88,22 @@ class Elevator {
 	 * @param {Array} solution Vetor de soluções encontradas
 	 *
 	 */
-	calculeFloor(qntStops, stops, solution) {
+	calculeFloor(qntStops, stops, solution, byBruteForce = false) {
 		let array = []
 		let cost = 0
 		for (let i = 0; i < qntStops; i++) {
 			cost += stops[i].qntPersons
 			array.push(stops[i].floor)
 		}
-
-		solution.push({ floor: array, cost: cost })
+		const data = { floor: array, cost: cost }
+		// if (!byBruteForce) {
+		// 	if (!solution.includes(data)) {
+		solution.push(data)
+		// 	}
+		// }else{
+		// 	solution.push(data)
+		// }
+		//console.log("-- debug solutions from calculateFloor --> ", JSON.stringify(data, null, 4))
 	}
 
 	/**

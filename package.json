@@ -5,8 +5,8 @@
 	"main": "src/index.js",
 	"scripts": {
 		"start": "node src/index.js",
-		"lab": "node scripts/execute_lab.js",
-		"graph": "node scripts/generate_graph.js",
+		"lab": "set NODE_OPTIONS='--max-old-space-size=10192' && node scripts/execute_lab.js",
+		"graph": "set NODE_OPTIONS='--max-old-space-size=10192' && node scripts/generate_graph.js",
 		"debug": "node . debug"
 	},
 	"keywords": [

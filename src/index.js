@@ -1,6 +1,7 @@
 // Import CLI libraries
 const inquirer = require('inquirer')
 const chalkPipe = require('chalk-pipe')
+const { performance } = require('perf_hooks');
 
 
 // Import class and constants
@@ -21,10 +22,29 @@ const menu = () => {
 		console.time('⌛️ Tempo de execução')
 		let elevator = new Elevator(option.qntFloors, option.stops.split(','))
 		let solutions = []
+		var t0 = performance.now()
 		for (let i = 1; i <= option.qntStops; i++) {
-			eval(`elevator.execute(i, solutions)`)
+			elevator.execute(i, solutions)
 		}
-		console.timeEnd('⌛️ Tempo de execução')
+		var t1 = performance.now()
+		console.log("Execution time: " + (t3 - t2).toPrecision(3) + " milliseconds.")
+
+		solutions.sort((a, b) => b.cost - a.cost || a.floor.length - b.floor.length)
+		console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
+		debug(solutions)
+		console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
+		console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas para subir ou descer as escadas: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
+		console.log()
+		console.log("=============== BRUTE FORCE")
+		console.log()
+		elevator = new Elevator(option.qntFloors, option.stops.split(','))
+		solutions = []
+		var t2 = performance.now()
+		for (let i = 1; i <= option.qntStops; i++) {
+			elevator.bruteForce(i, solutions)
+		}
+		var t3 = performance.now()
+		console.log("Execution time: " + (t3 - t2).toPrecision(3) + " milliseconds.")
 
 		solutions.sort((a, b) => b.cost - a.cost || a.floor.length - b.floor.length)
 		console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))

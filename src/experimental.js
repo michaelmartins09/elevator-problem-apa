@@ -1,7 +1,7 @@
 // Import CLI libraries
 const inquirer = require('inquirer')
 const chalkPipe = require('chalk-pipe')
-const now = require('performance-now')
+const { performance } = require('perf_hooks');
 
 // Import class and constants
 const options = require('./constants/options')
@@ -14,65 +14,26 @@ module.exports = {
 		let resultBruteForce = {}
 		let response = {}
 		let index = 1
-		
-		if (testBruteForce) {
-			for (const problem of data) {
-			
-				console.log('--------------------------------------------------------------')
-				console.log('Carga de dados: ', problem)
-				console.log('--------------------------------------------------------------')
-				
-				const { charge, stops, quantityStops } = problem
-				
-				console.log()
-				const startTime = now()
-				console.time('⌛️ Tempo de execução')
-				let elevator = new Elevator(charge, stops.split(','))
-				let solutions = []
-				for (let i = 1; i <= quantityStops; i++) {
-					eval(`elevator.testBruteForce(i, solutions)`)
-				}
-				const endTime = now()
-				console.timeEnd('⌛️ Tempo de execução')
-	
-				solutions.sort((a, b) => b.cost - a.cost || a.floor.length - b.floor.length)
-				console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
-				debug(solutions)
-				console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
-				console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas para subir ou descer as escadas: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
-				console.log()
-	
-	
-				const chargeProblem = {
-					solutions: solutions.length,
-					time: (endTime-startTime).toFixed(2),
-					charge
-				}
-	
-				resultBruteForce[`experimento${index}`] = chargeProblem
-				index++
-				// menu()
-			}
-		}
-		index = 1
+
 		for (const problem of data) {
 			
 			console.log('--------------------------------------------------------------')
 			console.log('Carga de dados: ', problem)
 			console.log('--------------------------------------------------------------')
 			
-			const { charge, stops, quantityStops } = problem
+			const { lifts, stops, quantityStops } = problem
 			
 			console.log()
-			const startTime = now()
-			console.time('⌛️ Tempo de execução')
-			let elevator = new Elevator(charge, stops.split(','))
+			let elevator = new Elevator(lifts, stops.split(','))
 			let solutions = []
+
+			const startTime = performance.now()
 			for (let i = 1; i <= quantityStops; i++) {
-				eval(`elevator.execute(i, solutions)`)
+				elevator.execute(i, solutions)
 			}
-			const endTime = now()
-			console.timeEnd('⌛️ Tempo de execução')
+
+			const endTime = performance.now()
+			console.log("TIME: ", endTime - startTime)
 
 			solutions.sort((a, b) => b.cost - a.cost || a.floor.length - b.floor.length)
 			console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
@@ -82,15 +43,53 @@ module.exports = {
 			console.log()
 
 
-			const chargeProblem = {
+			const liftsProblem = {
 				solutions: solutions.length,
-				time: (endTime-startTime).toFixed(2),
-				charge
+				time: millisToMinutesAndSeconds((endTime-startTime).toPrecision(5)),
+				lifts
 			}
 
-			result[`experimento${index}`] = chargeProblem
+			result[`experimento${index}`] = liftsProblem
 			index++
-			// menu()
+		}
+		
+		index = 1
+		if (testBruteForce) {
+			for (const problem of data) {
+			
+				console.log('--------------------------------------------------------------')
+				console.log('Carga de dados: ', problem)
+				console.log('--------------------------------------------------------------')
+				
+				const { lifts, stops, quantityStops } = problem
+				
+				console.log()
+				let elevator = new Elevator(lifts, stops.split(','))
+				let solutions = []
+				const startTime = performance.now()
+				for (let i = 1; i <= quantityStops; i++) {
+					elevator.bruteForce(i, solutions)
+				}
+				const endTime = performance.now()
+				console.log("TIME: ", endTime - startTime)
+	
+				solutions.sort((a, b) => b.cost - a.cost || a.floor.length - b.floor.length)
+				console.log(chalkPipe('lightblue')(`#️⃣  Possíveis soluções: ${solutions.length}`))
+				debug(solutions)
+				console.log(chalkPipe('yellow')(`✅ Melhor combinação de andares para paradas: ${solutions[0].floor}`))
+				console.log(chalkPipe('yellow')(`👥 Quantidade de pessoas que não conseguirão entrar no elevador: ${elevator.qntTotalPersons - solutions[0].cost} de ${elevator.qntTotalPersons}`))
+				console.log()
+	
+	
+				const liftsProblem = {
+					solutions: solutions.length,
+					time: millisToMinutesAndSeconds((endTime-startTime).toPrecision(5)),
+					lifts
+				}
+	
+				resultBruteForce[`experimento${index}`] = liftsProblem
+				index++
+			}
 		}
 
 		response["bruteForce"] = resultBruteForce
@@ -112,4 +111,9 @@ const debug = (solutions) => {
 		console.log(solutions)
 		console.log()
 	}
+}
+
+function millisToMinutesAndSeconds(millis) {
+	var seconds = ((millis % 60000) / 1000).toPrecision(3);
+	return (seconds < 10 ? '0' : '') + seconds;
 }
